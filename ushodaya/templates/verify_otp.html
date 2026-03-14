@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify OTP - Ushodaya Bankers</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-body">
+
+  <div class="auth-container">
+    <h2>Verify OTP</h2>
+
+    <form method="POST" class="auth-form">
+      <input type="text" name="otp" placeholder="Enter OTP" required />
+      <button type="submit">Verify OTP</button>
+    </form>
+  </div>
+
+</body>
+</html>

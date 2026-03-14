@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard - Ushodaya Bankers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+
+<div class="page-content">
+
+  <header class="header">
+    <div class="container nav">
+      <span class="brand-name">Ushodaya Bankers - Admin</span>
+      <a href="/logout" class="login-btn">Logout</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>Loan Management</h2>
+
+      <button class="btn-primary" onclick="openModal()">➕ Add New Loan</button>
+
+      <table class="loan-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Loan Amount (₹)</th>
+            <th>Interest/Month</th>
+            <th>Interest Till Now (₹)</th>
+            <th>Remaining Interest (₹)</th>
+            <th>Remaining Principal (₹)</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="loanTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<!-- ADD LOAN MODAL -->
+<div class="modal" id="loanModal">
+  <div class="modal-content">
+    <h3>Add Loan Details</h3>
+
+    <form id="loanForm">
+      <input type="text" id="fullName" placeholder="Full Name" required />
+      <textarea id="address" placeholder="Address" required></textarea>
+      <input type="date" id="loanDate" required />
+      <input type="number" id="loanAmount" placeholder="Total Loan Amount (₹)" required />
+      <input type="text" id="goldItems" placeholder="Gold Items" required />
+      <input type="number" id="totalWeight" placeholder="Total Weight (grams)" required />
+      <input type="number" id="carats" placeholder="Carats" required />
+      <input type="text" id="ornamentName" placeholder="Ornament Name" required />
+
+      <div class="interest-box">
+        Monthly Interest: ₹<span id="interestValue">0</span>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- PAY MODAL -->
+<div class="modal" id="payModal">
+  <div class="modal-content">
+    <h3>Make Payment</h3>
+    <input type="number" id="payInterest" placeholder="Pay Interest (₹)" />
+    <input type="number" id="payPrincipal" placeholder="Pay Principal (₹)" />
+    <div class="modal-actions">
+      <button type="button" onclick="closePayModal()">Cancel</button>
+      <button class="btn-primary" onclick="submitPayment()">Pay</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function loadLoans() {
+    const res = await fetch("/api/loans");
+    const data = await res.json();
+    if (!data.success) return;
+
+    const tbody = document.getElementById("loanTableBody");
+    tbody.innerHTML = "";
+
+    data.loans.forEach(loan => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${loan.full_name}</td>
+        <td>₹${loan.loan_amount.toFixed(2)}</td>
+        <td>₹${loan.monthly_interest.toFixed(2)}</td>
+        <td>₹${loan.interest_till_now.toFixed(2)} (${loan.months_passed} months)</td>
+        <td>₹${loan.remaining_interest.toFixed(2)}</td>
+        <td>₹${loan.remaining_principal.toFixed(2)}</td>
+        <td>${loan.loan_date}</td>
+        <td>
+          <button class="btn-primary" onclick="openPayModal(${loan.loan_id})">Pay</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  loadLoans();
+
+  function openModal() {
+    document.getElementById("loanModal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("loanModal").style.display = "none";
+  }
+
+  // ===== PAY FEATURE =====
+  let currentLoanId = null;
+
+  function openPayModal(loanId) {
+    currentLoanId = loanId;
+    document.getElementById("payModal").style.display = "flex";
+  }
+
+  function closePayModal() {
+    document.getElementById("payModal").style.display = "none";
+    document.getElementById("payInterest").value = "";
+    document.getElementById("payPrincipal").value = "";
+  }
+
+  async function submitPayment() {
+    const payInterest = document.getElementById("payInterest").value || 0;
+    const payPrincipal = document.getElementById("payPrincipal").value || 0;
+
+    const res = await fetch("/api/pay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        loan_id: currentLoanId,
+        pay_interest: payInterest,
+        pay_principal: payPrincipal
+      })
+    });
+
+    const data = await res.json();
+    alert(data.message || "Payment saved");
+
+    closePayModal();
+    loadLoans();
+  }
+
+  // ===== INTEREST PREVIEW =====
+  const loanAmountInput = document.getElementById("loanAmount");
+  const interestValue = document.getElementById("interestValue");
+
+  loanAmountInput.addEventListener("input", function () {
+    const amount = Number(this.value || 0);
+    const interest = (amount * 2) / 100;
+    interestValue.textContent = interest.toFixed(2);
+  });
+
+  document.getElementById("loanForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const payload = {
+      full_name: document.getElementById("fullName").value,
+      address: document.getElementById("address").value,
+      loan_date: document.getElementById("loanDate").value,
+      loan_amount: document.getElementById("loanAmount").value,
+      gold_items: document.getElementById("goldItems").value,
+      total_weight: document.getElementById("totalWeight").value,
+      carats: document.getElementById("carats").value,
+      ornament_name: document.getElementById("ornamentName").value
+    };
+
+    const res = await fetch("/api/loans", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    alert(data.message || "Saved");
+
+    if (data.success) {
+      closeModal();
+      document.getElementById("loanForm").reset();
+      interestValue.textContent = "0";
+      loadLoans();
+    }
+  });
+</script>
+
+</body>
+</html>

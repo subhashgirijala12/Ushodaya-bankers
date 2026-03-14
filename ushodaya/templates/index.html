@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ushodaya Bankers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="font-sans antialiased selection:bg-banker-gold selection:text-black">
+
+  <!-- Loading Screen -->
+  <div id="loader" class="loader-overlay">
+    <div class="flex flex-col items-center gap-4">
+      <div class="loader-ring"></div>
+      <div class="text-banker-gold font-serif tracking-widest text-sm animate-pulse">INITIALIZING VAULT</div>
+    </div>
+  </div>
+
+  <!-- Dynamic Background -->
+  <canvas id="gold-canvas"></canvas>
+
+  <!-- FULL PAGE ANIMATED BACKGROUND -->
+  <div class="page-bg">
+    <div class="gold-dots-layer"></div>
+    <div class="gold-shimmer"></div>
+  </div>
+
+  <!-- CONTENT WRAPPER -->
+  <div class="page-content">
+
+    <!-- TOP MARGIN SPACE -->
+    <div class="top-space"></div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="container nav">
+        <div class="brand">
+          <img src="{{ url_for('static', filename='images/ushodaya_logo.png') }}" alt="Logo" class="logo" />
+          <span class="brand-name">Ushodaya Bankers</span>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <nav id="mobileMenu" class="nav-menu">
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="/login" class="login-btn">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-content gsap-hero-text opacity-0 translate-y-10">
+        <h1>Ushodaya Bankers</h1>
+        <p>Secure Gold. Instant Money. Complete Trust.</p>
+        <div class="hero-buttons">
+          <button onclick="scrollToSection('about')" class="btn-primary">Explore Services</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="gsap-fade-up">About Ushodaya Bankers</h2>
+        <p class="about-text gsap-fade-up">
+          Ushodaya Bankers is a trusted gold banking service where you can keep your
+          gold safe and receive money equal to its worth. We ensure complete security,
+          transparent valuation, and fair interest practices for every customer.
+        </p>
+
+        <div class="about-cards">
+          <div class="card gsap-card">
+            <div class="card-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>100% Secure Gold Storage</h3>
+            <p>State-of-the-art vaults with 24/7 surveillance and insurance coverage for complete peace of mind.</p>
+          </div>
+          <div class="card gsap-card">
+            <div class="card-icon">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <h3>Fair Gold Valuation</h3>
+            <p>Real-time market rates with transparent assessment by certified gold experts.</p>
+          </div>
+          <div class="card gsap-card">
+            <div class="card-icon">
+              <i class="fa-solid fa-percent"></i>
+            </div>
+            <h3>Transparent Interest System</h3>
+            <p>Competitive interest rates with no hidden charges or processing fees.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info gsap-fade-right">
+          <h2>Contact Details</h2>
+          <div class="info-item">
+            <i class="fa-solid fa-building-columns"></i>
+            <div>
+              <strong>Bank Name:</strong>
+              <span>Ushodaya Bankers</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-user-tie"></i>
+            <div>
+              <strong>Contact Person:</strong>
+              <span>G. Mallikharjuna Rao</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Phone:</strong>
+              <span>9133383438, 6385145595</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Location:</strong>
+              <span>Bhimavaram, AP</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <strong>Working Hours:</strong>
+              <span>Mon – Sat, 9:30 AM – 6:30 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card gsap-fade-left">
+          <div class="card-icon-large">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <h3>Visit Our Bank</h3>
+          <p>
+            Walk into Ushodaya Bankers with your gold and required documents.
+            Our team will assist you with secure storage and instant loan processing.
+          </p>
+          <button onclick="scrollToSection('contact')" class="btn-primary">Get Directions</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-brand">
+          <i class="fa-solid fa-coins"></i>
+          <h3>Ushodaya Bankers</h3>
+        </div>
+        <p class="footer-person">G. Mallikharjuna Rao</p>
+        <div class="footer-contact">
+          <p><i class="fa-solid fa-phone"></i> 9133383438 | 6385145595</p>
+          <p><i class="fa-solid fa-location-dot"></i> Bhimavaram, Near Mavullamma Puri Gudi, 534201, Andhra Pradesh</p>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Ushodaya Bankers. All rights reserved. | Securing Your Wealth with Trust</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- BOTTOM SPACE -->
+    <div class="bottom-space"></div>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-8 right-8 bg-banker-gray border border-banker-gold text-white px-6 py-4 rounded shadow-2xl transform translate-y-24 transition-transform duration-300 z-[110] flex items-center gap-3">
+    <i class="fa-solid fa-circle-check text-banker-gold text-xl"></i>
+    <div>
+      <h4 class="font-bold text-sm">Success</h4>
+      <p class="text-xs text-gray-400" id="toast-message">Operation completed successfully.</p>
+    </div>
+  </div>
+
+  <script>
+    // --- Initialization ---
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      loader.style.opacity = '0';
+      setTimeout(() => loader.remove(), 800);
+      initParticles();
+      initAnimations();
+    });
+
+    // --- Canvas Particle System (Gold Dust) ---
+    function initParticles() {
+      const canvas = document.getElementById('gold-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      class Particle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.5;
+          this.speedY = (Math.random() - 0.5) * 0.5;
+          this.opacity = Math.random() * 0.5 + 0.1;
+          this.life = Math.random() * 100 + 100;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.life--;
+          
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 100) {
+            const forceDirectionX = dx / distance;
+            const forceDirectionY = dy / distance;
+            const force = (100 - distance) / 100;
+            this.speedX -= forceDirectionX * force * 0.05;
+            this.speedY -= forceDirectionY * force * 0.05;
+          }
+
+          if (this.life <= 0 || this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+            this.reset();
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      const mouse = { x: null, y: null };
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.x;
+        mouse.y = e.y;
+      });
+      window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    // --- GSAP Animations ---
+    function initAnimations() {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to('.gsap-hero-text', {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "power3.out",
+        delay: 0.5
+      });
+
+      gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+        gsap.from(element, {
+          scrollTrigger: {
+            trigger: element,
+            start: "top 85%",
+          },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power3.out"
+        });
+      });
+
+      gsap.from('.gsap-card', {
+        scrollTrigger: {
+          trigger: '#about',
+          start: "top 70%",
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "back.out(1.7)"
+      });
+
+      gsap.from('.gsap-fade-right', {
+        scrollTrigger: { trigger: '.gsap-fade-right', start: "top 75%" },
+        opacity: 0, x: -50, duration: 1, ease: "power3.out"
+      });
+
+      gsap.from('.gsap-fade-left', {
+        scrollTrigger: { trigger: '.gsap-fade-left', start: "top 75%" },
+        opacity: 0, x: 50, duration: 1, ease: "power3.out"
+      });
+    }
+
+    // --- UI Interactions ---
+    function toggleMenu() {
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("show");
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- Auth Modal Logic ---
+    const modal = document.getElementById('auth-modal');
+    const backdrop = document.getElementById('auth-backdrop');
+    const content = document.getElementById('auth-content');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const tabLogin = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
+
+    function toggleAuthModal(type) {
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        void modal.offsetWidth;
+        backdrop.classList.remove('opacity-0');
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+        switchAuthTab(type);
+      } else {
+        closeAuthModal();
+      }
+    }
+
+    function closeAuthModal() {
+      backdrop.classList.add('opacity-0');
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    function switchAuthTab(type) {
+      if (type === 'login') {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        tabLogin.classList.add('text-banker-gold', 'border-banker-gold');
+        tabLogin.classList.remove('text-gray-500', 'border-transparent');
+        tabRegister.classList.remove('text-banker-gold', 'border-banker-gold');
+        tabRegister.classList.add('text-gray-500', 'border-transparent');
+      } else {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+        tabRegister.classList.add('text-banker-gold', 'border-banker-gold');
+        tabRegister.classList.remove('text-gray-500', 'border-transparent');
+        tabLogin.classList.remove('text-banker-gold', 'border-banker-gold');
+        tabLogin.classList.add('text-gray-500', 'border-transparent');
+      }
+    }
+
+    // --- Form Handling ---
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').innerText = message;
+      toast.classList.remove('translate-y-24');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24');
+      }, 3000);
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const originalText = btn.innerText;
+      
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerText = originalText;
+        btn.disabled = false;
+        closeAuthModal();
+        showToast("Welcome back to Ushodaya Bankers.");
+        document.querySelector('.login-btn').innerText = "My Account";
+      }, 2000);
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const originalText = btn.innerText;
+
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating Profile...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerText = originalText;
+        btn.disabled = false;
+        closeAuthModal();
+        showToast("Account created successfully. Welcome to Ushodaya Bankers.");
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>

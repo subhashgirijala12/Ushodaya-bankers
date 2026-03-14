@@ -1,0 +1,549 @@
+/* Dashboard Gold Banker Theme - dashboard.css */
+
+:root {
+  --gold-primary: #D4AF37;
+  --gold-light: #F4E4BC;
+  --gold-dark: #AA8C2C;
+  --gold-shine: #FFD700;
+  --navy-deep: #0F172A;
+  --navy-mid: #1E293B;
+  --navy-light: #334155;
+  --cream: #FDF6E3;
+  --white: #FFFFFF;
+  --success: #10B981;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --shadow-gold: rgba(212, 175, 55, 0.25);
+  --shadow-dark: rgba(0, 0, 0, 0.3);
+}
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+  min-height: 100vh;
+  color: var(--cream);
+  line-height: 1.6;
+}
+
+/* Page Content Wrapper */
+.page-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* Header - Premium Banking Header */
+.header {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--gold-primary);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px var(--shadow-dark);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-name::before {
+  content: '◆';
+  color: var(--gold-shine);
+  font-size: 1.2rem;
+}
+
+/* Logout Button */
+.login-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: 2px solid var(--gold-primary);
+  color: var(--gold-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn:hover {
+  background: var(--gold-primary);
+  color: var(--navy-deep);
+  box-shadow: 0 0 20px var(--shadow-gold);
+  transform: translateY(-2px);
+}
+
+/* Main Section */
+.section {
+  flex: 1;
+  padding: 40px 0;
+}
+
+.section h2 {
+  font-size: 2rem;
+  color: var(--gold-primary);
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-primary), transparent);
+  border-radius: 2px;
+}
+
+/* Primary Button - Gold Gradient */
+.btn-primary {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+  border: none;
+  border-radius: 10px;
+  color: var(--navy-deep);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--shadow-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--shadow-gold);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+/* Small button variant for table actions */
+.loan-table .btn-primary {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+/* Loan Table - Premium Data Table */
+.loan-table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px var(--shadow-dark);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.loan-table thead {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(170, 140, 44, 0.15) 100%);
+}
+
+.loan-table th {
+  padding: 20px 16px;
+  text-align: left;
+  color: var(--gold-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+  white-space: nowrap;
+}
+
+.loan-table td {
+  padding: 18px 16px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  color: var(--cream);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.loan-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.loan-table tbody tr:hover {
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.loan-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Currency styling */
+.loan-table td:nth-child(2),
+.loan-table td:nth-child(3),
+.loan-table td:nth-child(4),
+.loan-table td:nth-child(5),
+.loan-table td:nth-child(6) {
+  color: var(--gold-light);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+}
+
+/* Interest till now with months */
+.loan-table td:nth-child(4) {
+  color: var(--warning);
+}
+
+/* Remaining amounts */
+.loan-table td:nth-child(5),
+.loan-table td:nth-child(6) {
+  color: var(--success);
+}
+
+/* Date column */
+.loan-table td:nth-child(7) {
+  color: rgba(244, 228, 188, 0.8);
+  font-size: 0.85rem;
+}
+
+/* Action column */
+.loan-table td:last-child {
+  text-align: center;
+}
+
+/* Modal - Glassmorphism Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  border: 2px solid var(--gold-primary);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(212, 175, 55, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: slideUp 0.4s ease;
+}
+
+/* Gold corner accents */
+.modal-content::before,
+.modal-content::after {
+  content: '◆';
+  position: absolute;
+  color: var(--gold-primary);
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+.modal-content::before {
+  top: 15px;
+  left: 20px;
+}
+
+.modal-content::after {
+  bottom: 15px;
+  right: 20px;
+}
+
+.modal-content h3 {
+  color: var(--gold-primary);
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Form Styling in Modal */
+#loanForm,
+#payModal form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#loanForm input,
+#loanForm textarea,
+#payModal input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 10px;
+  color: var(--cream);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+#loanForm input:focus,
+#loanForm textarea:focus,
+#payModal input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px var(--shadow-gold);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+#loanForm input::placeholder,
+#loanForm textarea::placeholder,
+#payModal input::placeholder {
+  color: rgba(244, 228, 188, 0.4);
+}
+
+#loanForm textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Interest Box - Highlighted Calculation */
+.interest-box {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(170, 140, 44, 0.1) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px 0;
+  text-align: center;
+  color: var(--gold-light);
+  font-size: 1.1rem;
+}
+
+.interest-box span {
+  color: var(--gold-shine);
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-left: 5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  letter-spacing: 0.5px;
+}
+
+.modal-actions button[type="button"] {
+  background: transparent;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  color: var(--gold-light);
+}
+
+.modal-actions button[type="button"]:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.modal-actions .btn-primary {
+  margin: 0;
+}
+
+/* Pay Modal Specific Styling */
+#payModal .modal-content {
+  max-width: 450px;
+}
+
+#payModal input {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+
+#payModal input::placeholder {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .loan-table {
+    font-size: 0.85rem;
+  }
+  
+  .loan-table th,
+  .loan-table td {
+    padding: 14px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .brand-name {
+    font-size: 1.2rem;
+  }
+  
+  .section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .loan-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .loan-table th,
+  .loan-table td {
+    padding: 12px 16px;
+  }
+  
+  .modal-content {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(244, 228, 188, 0.5);
+}
+
+.empty-state::before {
+  content: '📋';
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
